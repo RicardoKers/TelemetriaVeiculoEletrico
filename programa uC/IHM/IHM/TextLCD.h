@@ -2,31 +2,31 @@
 // Version 2019-1
 
 // data pin 4 from LCD
-#define LCD_DATA_PORT4_H PORTB|=0b00000100
-#define LCD_DATA_PORT4_L PORTB&=~0b00000100
-#define LCD_DATA_DIRECTION4 DDRB|=0b00000100
+#define LCD_DATA_PORT4_H PORTD|=0b00000001
+#define LCD_DATA_PORT4_L PORTD&=~0b00000001
+#define LCD_DATA_DIRECTION4 DDRD|=0b00000001
 // data pin 5 from LCD
-#define LCD_DATA_PORT5_H PORTB|=0b00001000
-#define LCD_DATA_PORT5_L PORTB&=~0b00001000
-#define LCD_DATA_DIRECTION5 DDRB|=0b00001000
+#define LCD_DATA_PORT5_H PORTD|=0b00000010
+#define LCD_DATA_PORT5_L PORTD&=~0b00000010
+#define LCD_DATA_DIRECTION5 DDRD|=0b00000010
 // data pin 6 from LCD
-#define LCD_DATA_PORT6_H PORTB|=0b00010000
-#define LCD_DATA_PORT6_L PORTB&=~0b00010000
-#define LCD_DATA_DIRECTION6 DDRB|=0b00010000
+#define LCD_DATA_PORT6_H PORTD|=0b00100000
+#define LCD_DATA_PORT6_L PORTD&=~0b00100000
+#define LCD_DATA_DIRECTION6 DDRD|=0b00100000
 // data pin 7 from LCD
-#define LCD_DATA_PORT7_H PORTB|=0b00100000
-#define LCD_DATA_PORT7_L PORTB&=~0b00100000
-#define LCD_DATA_DIRECTION7 DDRB|=0b00100000
+#define LCD_DATA_PORT7_H PORTD|=0b00010000
+#define LCD_DATA_PORT7_L PORTD&=~0b00010000
+#define LCD_DATA_DIRECTION7 DDRD|=0b00010000
 
 // E pin from LCD
-#define LCD_E_H PORTB|=0b00000010
-#define LCD_E_L PORTB&=~0b00000010
-#define LCD_E_DIRECTION DDRB|=0b00000010
+#define LCD_E_H PORTD|=0b10000000
+#define LCD_E_L PORTD&=~0b10000000
+#define LCD_E_DIRECTION DDRD|=0b10000000
 
 // RS pin from LCD
-#define LCD_RS_H PORTB|=0b00000001
-#define LCD_RS_L PORTB&=~0b00000001
-#define LCD_RS_DIRECTION DDRB|=0b00000001
+#define LCD_RS_H PORTD|=0b01000000
+#define LCD_RS_L PORTD&=~0b01000000
+#define LCD_RS_DIRECTION DDRD|=0b01000000
 
 // connect R/W pin to GND
 
@@ -34,24 +34,11 @@
 #define LCD_columns 20
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-//                            D E L A Y
-//////////////////////////////////////////////////////////////////////////////////////////////////
-static void LCD_delay(unsigned long del)
-{
-while(del>0)
-	{
-		del--;
-		DDRB&=0b11111111; // to force the compiler to implement
-						  // the LCD_delay with optimizations enabled
-	}
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////////////
 //                              L C D   P U T   I N S T
 //////////////////////////////////////////////////////////////////////////////////////////////////
 static void LCD_put_inst(unsigned char cmd)
 {
-	LCD_delay(55);
+	_delay_us(50);
 	LCD_RS_L;
 	// bit 4
 	if((cmd&0b00010000)!=0) LCD_DATA_PORT4_H;
@@ -66,6 +53,7 @@ static void LCD_put_inst(unsigned char cmd)
 	if((cmd&0b10000000)!=0) LCD_DATA_PORT7_H;
 	else LCD_DATA_PORT7_L;
 	LCD_E_H;
+	_delay_us(10);
 	LCD_E_L;
 	// bit 0
 	if((cmd&0b00000001)!=0) LCD_DATA_PORT4_H;
@@ -80,6 +68,7 @@ static void LCD_put_inst(unsigned char cmd)
 	if((cmd&0b00001000)!=0) LCD_DATA_PORT7_H;
 	else LCD_DATA_PORT7_L;
 	LCD_E_H;
+	_delay_us(10);
 	LCD_E_L;
 }
 
@@ -88,7 +77,7 @@ static void LCD_put_inst(unsigned char cmd)
 //////////////////////////////////////////////////////////////////////////////////////////////////
 void LCD_putchar(char c)
 {
-	LCD_delay(55);
+	_delay_us(50);
 	LCD_RS_H;
 	// bit 4
 	if((c&0b00010000)!=0) LCD_DATA_PORT4_H;
@@ -103,6 +92,7 @@ void LCD_putchar(char c)
 	if((c&0b10000000)!=0) LCD_DATA_PORT7_H;
 	else LCD_DATA_PORT7_L;
 	LCD_E_H;
+	_delay_us(10);
 	LCD_E_L;
 	// bit 0
 	if((c&0b00000001)!=0) LCD_DATA_PORT4_H;
@@ -117,9 +107,9 @@ void LCD_putchar(char c)
 	if((c&0b00001000)!=0) LCD_DATA_PORT7_H;
 	else LCD_DATA_PORT7_L;
 	LCD_E_H;
+	_delay_us(10);
 	LCD_E_L;
 }
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //                                    C L R  L C D
@@ -151,7 +141,7 @@ void gotoxy(char x,char y)
 		LCD_put_inst(0xC0+LCD_columns+x);
 	}
 }
-
+/*
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //                               E S P E C I A L  C H A R
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -168,7 +158,7 @@ static void especial_char(char addr, char L1,char L2,char L3,char L4,char L5,cha
 	LCD_putchar(L7);
 	LCD_putchar(L8);
 }
-
+*/
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //                               P U T S T R
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -313,7 +303,7 @@ void LCD_init()
 	unsigned int i;
 	char initdata[] = {0x33, 0x32, 0x28, 0x0C, 0x01, 0x06, 0x80};
 
-	LCD_delay(200);	
+	_delay_ms(16);	
 
 	LCD_DATA_DIRECTION4;
 	LCD_DATA_DIRECTION5;
@@ -328,6 +318,6 @@ void LCD_init()
 	for (i = 0; i < sizeof initdata; ++i)
 	{
 		LCD_put_inst(initdata[i]);
-		LCD_delay(500);
+		_delay_ms(16);
 	}
 }

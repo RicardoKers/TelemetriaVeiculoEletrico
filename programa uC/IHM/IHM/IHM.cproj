@@ -43,15 +43,15 @@
     </com_atmel_avrdbg_tool_simulator>
     <AsfFrameworkConfig>
       <framework-data xmlns="">
-  <options />
-  <configurations />
-  <files />
-  <documentation help="" />
-  <offline-documentation help="" />
-  <dependencies>
-    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.40.0" />
-  </dependencies>
-</framework-data>
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.40.0" />
+        </dependencies>
+      </framework-data>
     </AsfFrameworkConfig>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -133,7 +133,40 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="diskio.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="diskio.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ff.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ff.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ffconf.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="i2c.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="i2c.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="integer.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="rtc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="rtc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TextLCD.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

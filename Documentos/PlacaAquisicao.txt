@@ -1,0 +1,30 @@
+Quantidade Componente
+- 2	LED Verde 3mm                                                 
+- 4	LM2596S	Regulador de tensão chaveado SMD                            
+20  Capacitor cerâmico 100nF
+26  Capacitor Eletrolítico 4,7uF 50V 
+12   Capacitor Eletrolítico 10uF 50V                    
+6   Capacitor Eletrolítico 100uF 50V
+4   Capacitor Eletrolítico 470uF 16V
+- 4   Indutor SMD 100uH
+14   Resistor 10K
+2   Resistor 11.3K                               
+2   Resistor 120ohm                              
+4   Resistor 15K                    
+- 2   Cristal 16MHz                                              
+34  Resistor 1K                            
+2	Diodo 1N4007                                                 
+4   Capacitor cerâmico 1nF           
+4   Resistor 2,2K                    
+4   Capacitor cerâmico 22pF
+2   Resistor 5.49K                         
+6   Resistor 560ohm                     
+24  Resistor 8,3K                             
+4   ACS712-LC (Circuito integrador, não o módulo)
+- 2   LTC485S driver RS485                 
+12   Conector 4 pinos 3.81mm               
+4   MCP602P AmpOp microchip                                              
+4   MEGA8-AI microcontrolador SMD TQFP32                                      
+4   Conectores 2 pinos 5.01mm                                           
+2   LM1117 regulador de tensão ajustavel smd SOT223
+4   SS56 Diodo SCHOTTKY smd

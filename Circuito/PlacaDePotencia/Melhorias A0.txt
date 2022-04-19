@@ -1,0 +1,13 @@
+Melhorias Sinal
+	-> Bornes entrada (5V, 0V, Hin, Lin) provenientes do dsp
+	-> Alimentação externa via borne apenas do (15V, 0V) de gatilho
+	-> Sinais de comando todos provenientes do dsp, verificar pinos
+
+
+
+Melhorias Potência
+	-> Espaçamento entre pernas dos mosfets
+	-> Diodos de roda livre (30EHT06 ou semelhante)
+	-> Conexão do source dos mosfets negativos com o gnd do ir2110, para melhoria do referêncial
+	-> Dissipador na parte de cima da placa
+	-> Adição do relé para corta-corrente via homem morto e botão de emergência
