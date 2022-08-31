@@ -547,7 +547,7 @@ int main(void)
  2fe:	15 86       	std	Z+13, r1	; 0x0d
  300:	14 86       	std	Z+12, r1	; 0x0c
 			
-			for(int cont=0; cont<50; cont++)
+			for(int cont=0; cont<49; cont++)
  302:	c0 e0       	ldi	r28, 0x00	; 0
  304:	d0 e0       	ldi	r29, 0x00	; 0
  306:	06 c0       	rjmp	.+12     	; 0x314 <main+0x56>
@@ -563,9 +563,9 @@ int main(void)
 			data.valores[5]=0;
 			data.valores[6]=0;
 			
-			for(int cont=0; cont<50; cont++)
+			for(int cont=0; cont<49; cont++)
  312:	21 96       	adiw	r28, 0x01	; 1
- 314:	c2 33       	cpi	r28, 0x32	; 50
+ 314:	c1 33       	cpi	r28, 0x31	; 49
  316:	d1 05       	cpc	r29, r1
  318:	bc f3       	brlt	.-18     	; 0x308 <main+0x4a>
 				while(ADC_scanFiniched==0)

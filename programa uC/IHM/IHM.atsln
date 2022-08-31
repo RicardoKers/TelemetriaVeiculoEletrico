@@ -5,17 +5,6 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "IHM", "IHM\IHM.cproj", "{DCE6C7E3-EE26-4D79-826B-08594B9AD897}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC50329-7B6C-41F3-9974-22847A2C57F0}"
-	ProjectSection(SolutionItems) = preProject
-		IHM\diskio.c = IHM\diskio.c
-		IHM\diskio.h = IHM\diskio.h
-		IHM\ff.c = IHM\ff.c
-		IHM\ff.h = IHM\ff.h
-		IHM\ffconf.h = IHM\ffconf.h
-		IHM\integer.h = IHM\integer.h
-		IHM\TextLCD.h = IHM\TextLCD.h
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR

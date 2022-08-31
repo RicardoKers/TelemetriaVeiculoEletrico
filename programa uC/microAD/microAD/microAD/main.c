@@ -1,6 +1,6 @@
 /*
  * microAD.c
- * Leutira das entradas analógicas p/ telemetria do veículo elétrico
+ * Leitira das entradas analógicas p/ telemetria do veículo elétrico
  * Created: 18/04/2022 13:52:49
  * Author : Kerschbaumer
  */ 
@@ -186,7 +186,7 @@ int main(void)
 			data.valores[5]=0;
 			data.valores[6]=0;
 			
-			for(int cont=0; cont<50; cont++)
+			for(int cont=0; cont<49; cont++)
 			{
 				ADC_startConversion();
 				while(ADC_scanFiniched==0)

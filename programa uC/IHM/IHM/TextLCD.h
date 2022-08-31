@@ -2,31 +2,31 @@
 // Version 2019-1
 
 // data pin 4 from LCD
-#define LCD_DATA_PORT4_H PORTD|=0b00000001
-#define LCD_DATA_PORT4_L PORTD&=~0b00000001
-#define LCD_DATA_DIRECTION4 DDRD|=0b00000001
+#define LCD_DATA_PORT4_H PORTB|=0b00000001
+#define LCD_DATA_PORT4_L PORTB&=~0b00000001
+#define LCD_DATA_DIRECTION4 DDRB|=0b00000001
 // data pin 5 from LCD
-#define LCD_DATA_PORT5_H PORTD|=0b00000010
-#define LCD_DATA_PORT5_L PORTD&=~0b00000010
-#define LCD_DATA_DIRECTION5 DDRD|=0b00000010
+#define LCD_DATA_PORT5_H PORTB|=0b00000010
+#define LCD_DATA_PORT5_L PORTB&=~0b00000010
+#define LCD_DATA_DIRECTION5 DDRB|=0b00000010
 // data pin 6 from LCD
-#define LCD_DATA_PORT6_H PORTD|=0b00100000
-#define LCD_DATA_PORT6_L PORTD&=~0b00100000
-#define LCD_DATA_DIRECTION6 DDRD|=0b00100000
+#define LCD_DATA_PORT6_H PORTB|=0b01000000
+#define LCD_DATA_PORT6_L PORTB&=~0b01000000
+#define LCD_DATA_DIRECTION6 DDRB|=0b01000000
 // data pin 7 from LCD
-#define LCD_DATA_PORT7_H PORTD|=0b00010000
-#define LCD_DATA_PORT7_L PORTD&=~0b00010000
-#define LCD_DATA_DIRECTION7 DDRD|=0b00010000
+#define LCD_DATA_PORT7_H PORTB|=0b10000000
+#define LCD_DATA_PORT7_L PORTB&=~0b10000000
+#define LCD_DATA_DIRECTION7 DDRB|=0b10000000
 
 // E pin from LCD
-#define LCD_E_H PORTD|=0b10000000
-#define LCD_E_L PORTD&=~0b10000000
-#define LCD_E_DIRECTION DDRD|=0b10000000
+#define LCD_E_H PORTD|=0b00100000
+#define LCD_E_L PORTD&=~0b00100000
+#define LCD_E_DIRECTION DDRD|=0b00100000
 
 // RS pin from LCD
-#define LCD_RS_H PORTD|=0b01000000
-#define LCD_RS_L PORTD&=~0b01000000
-#define LCD_RS_DIRECTION DDRD|=0b01000000
+#define LCD_RS_H PORTD|=0b10000000
+#define LCD_RS_L PORTD&=~0b10000000
+#define LCD_RS_DIRECTION DDRD|=0b10000000
 
 // connect R/W pin to GND
 
@@ -53,7 +53,7 @@ static void LCD_put_inst(unsigned char cmd)
 	if((cmd&0b10000000)!=0) LCD_DATA_PORT7_H;
 	else LCD_DATA_PORT7_L;
 	LCD_E_H;
-	_delay_us(10);
+	//_delay_us(1);
 	LCD_E_L;
 	// bit 0
 	if((cmd&0b00000001)!=0) LCD_DATA_PORT4_H;
@@ -68,7 +68,7 @@ static void LCD_put_inst(unsigned char cmd)
 	if((cmd&0b00001000)!=0) LCD_DATA_PORT7_H;
 	else LCD_DATA_PORT7_L;
 	LCD_E_H;
-	_delay_us(10);
+	//_delay_us(1);
 	LCD_E_L;
 }
 
@@ -92,7 +92,7 @@ void LCD_putchar(char c)
 	if((c&0b10000000)!=0) LCD_DATA_PORT7_H;
 	else LCD_DATA_PORT7_L;
 	LCD_E_H;
-	_delay_us(10);
+	//_delay_us(1);
 	LCD_E_L;
 	// bit 0
 	if((c&0b00000001)!=0) LCD_DATA_PORT4_H;
@@ -107,7 +107,7 @@ void LCD_putchar(char c)
 	if((c&0b00001000)!=0) LCD_DATA_PORT7_H;
 	else LCD_DATA_PORT7_L;
 	LCD_E_H;
-	_delay_us(10);
+	//_delay_us(1);
 	LCD_E_L;
 }
 
@@ -141,7 +141,7 @@ void gotoxy(char x,char y)
 		LCD_put_inst(0xC0+LCD_columns+x);
 	}
 }
-/*
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //                               E S P E C I A L  C H A R
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -158,7 +158,7 @@ static void especial_char(char addr, char L1,char L2,char L3,char L4,char L5,cha
 	LCD_putchar(L7);
 	LCD_putchar(L8);
 }
-*/
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //                               P U T S T R
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -174,7 +174,7 @@ void putstr(char *str)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //                               P U T U I N T
-////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 void putuint(unsigned int data)
 {
 	char str[11];
@@ -233,7 +233,7 @@ void putuint(unsigned int data)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //                               P U T I N T
-////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 void putint(int data)
 {
 	char str[12];
@@ -242,7 +242,7 @@ void putint(int data)
 	{
 		str[cont]='-';
 		cont++;
-		data=data*(-1); 
+		data=data*(-1);
 	}
 	if(data>999999999)
 	{
@@ -296,6 +296,17 @@ void putint(int data)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
+//                               P U T I N T D E C
+//////////////////////////////////////////////////////////////////////////////////////////////////
+void putintdec(int num)
+{
+	putint(num/10);
+	LCD_putchar('.');
+	putint(num-((num/10)*10));	
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
 //                               L C D   i n i t
 //////////////////////////////////////////////////////////////////////////////////////////////////
 void LCD_init()
@@ -303,7 +314,7 @@ void LCD_init()
 	unsigned int i;
 	char initdata[] = {0x33, 0x32, 0x28, 0x0C, 0x01, 0x06, 0x80};
 
-	_delay_ms(16);	
+	_delay_ms(16);
 
 	LCD_DATA_DIRECTION4;
 	LCD_DATA_DIRECTION5;
@@ -312,7 +323,7 @@ void LCD_init()
 	LCD_E_DIRECTION;
 	LCD_RS_DIRECTION;
 	LCD_E_H;
-	LCD_RS_L;   
+	LCD_RS_L;
 	LCD_E_L;
 	
 	for (i = 0; i < sizeof initdata; ++i)

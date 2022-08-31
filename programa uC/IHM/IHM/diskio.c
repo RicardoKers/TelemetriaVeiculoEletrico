@@ -17,8 +17,8 @@
 ---------------------------------------------------------------------------*/
 
 /* Port Controls  (Platform dependent) */
-#define CS_LOW()	PORTB &= ~0b00000100		/* MMC CS = L */
-#define	CS_HIGH()	PORTB |= 0b00000100			/* MMC CS = H */
+#define CS_LOW()	PORTC &= ~0b00001000		/* MMC CS = L */
+#define	CS_HIGH()	PORTC |= 0b00001000			/* MMC CS = H */
 #define SOCKWP		0 //(PINB & 0x20)		/* Write protected. yes:true, no:false, default:false */
 #define SOCKINS		1 //(!(PINB & 0x10))	/* Card detected.   yes:true, no:false, default:true */
 

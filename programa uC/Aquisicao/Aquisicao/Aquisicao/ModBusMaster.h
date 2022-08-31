@@ -15,7 +15,6 @@
  */
 
 // Configuração ModBus
-#define endereco_modbus 1 // endereço inicial do escravo
 #define tam_buff_recep 255
 #define tam_buff_trans 255
 #define modBusTimeout_ms 1000
@@ -87,7 +86,6 @@ uint16_t CRC16(uint8_t *ptr,uint16_t npts) // calcula o crc de um vetor
 
 void ModBusReset() // prepara para a próxima transmissão
 {
-	ModBus.end_modbus=endereco_modbus;
 	ModBus.status=inativo;
 	ModBus.erro=semErro;	
 }

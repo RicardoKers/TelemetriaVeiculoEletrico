@@ -4,6 +4,8 @@
 
 diskio.c
 
+ds18b20.c
+
 ff.c
 
 i2c.c
